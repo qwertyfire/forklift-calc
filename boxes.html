@@ -5,27 +5,30 @@
         <link rel="stylesheet" type="text/css" href="qStyles.css">
 
 
-        <title>Calculate Bags of Cement on a Pallet</title>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+        <title>Calculate Box's on a Pallet</title>
+        <script src="js/angular-1.2.1.min.js"></script>
         <script>
             var countryApp = angular.module('countryApp', []);
             countryApp.controller('GuessNumber', function ($scope) {
 
 
-                $scope.bgWeightOptions = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+                $scope.bxgWeightOptions = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
                 $scope.pltWeightOptions = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 
-                $scope.numberBags = Math.floor((Math.random() * 100) + 1);
-                $scope.bagWeight = $scope.bgWeightOptions[Math.floor(Math.random() * $scope.bgWeightOptions.length)];
+                $scope.boxesPerLayer = Math.floor((Math.random() * 10) + 1);
+                $scope.numberLayers = Math.floor((Math.random() * 6) + 1);
+                $scope.boxWeight = $scope.bxgWeightOptions[Math.floor(Math.random() * $scope.bxgWeightOptions.length)];
                 $scope.palletWeight = $scope.pltWeightOptions[Math.floor(Math.random() * $scope.pltWeightOptions.length)];
 
-                $scope.correctAnswer = ($scope.numberBags * $scope.bagWeight) + $scope.palletWeight;
+                $scope.correctAnswer = ($scope.boxesPerLayer * $scope.numberLayers * $scope.boxWeight) + $scope.palletWeight;
 
                 $scope.randomQuestion = function () {
-                    $scope.numberBags = Math.floor((Math.random() * 100) + 1);
-                    $scope.bagWeight = $scope.bgWeightOptions[Math.floor(Math.random() * $scope.bgWeightOptions.length)];
+                    $scope.boxesPerLayer = Math.floor((Math.random() * 10) + 1);
+                    $scope.numberLayers = Math.floor((Math.random() * 6) + 1);
+                    $scope.boxWeight = $scope.bxgWeightOptions[Math.floor(Math.random() * $scope.bxgWeightOptions.length)];
                     $scope.palletWeight = $scope.pltWeightOptions[Math.floor(Math.random() * $scope.pltWeightOptions.length)];
-                    $scope.correctAnswer = ($scope.numberBags * $scope.bagWeight) + $scope.palletWeight;
+                    $scope.correctAnswer = ($scope.boxesPerLayer * $scope.numberLayers * $scope.boxWeight) + $scope.palletWeight;
+
                     $scope.inputAnswer = '';
                     $scope.answerResponse = '';
                     $scope.answerSection = false;
@@ -58,20 +61,22 @@
     <body ng-controller="GuessNumber">
 
         <div class = "div-color centered" style = "max-width: 500px; width: auto;">
+
             <ul class ="nav">
-                <li><a class="active" href="/calc/bags">Bags</a></li>
-                <li><a href="/calc/boxes">Boxs</a></li>
-                <li><a href="/calc/drums">Drums</a></li>
+                <li><a  href="/CALCAPP/bags.html">Bags</a></li>
+                <li><a class="active" href="/CALCAPP/boxes.html">Boxs</a></li>
+                <li><a href="/CALCAPP/drums.html">Drums</a></li>
             </ul>
 
-            <h2>The load to be moved is bags of cement on a pallet.</h2>
-            <img src ="http://previews.123rf.com/images/mipan/mipan1402/mipan140200005/26041006-Forklift-with-cement-sacks-Stock-Photo-cement.jpg" style = "max-width: 500px;width: 100%;">
+            <h2>You are required to move a load consisting of boxes that are stacked on a pallet.</h2>
+            <img src ="img/11618187-3d-white-people-stock-boy-stacking-boxes.jpg" style = "max-width: 500px;width: 100%;">
             <ul>
-                <li><strong>{{numberBags}}</strong> bags on a pallet</li>
-                <li>Each bag weighs <strong>{{bagWeight}} kg</strong></li>
+                <li>There are <strong>{{boxesPerLayer}}</strong> boxes per layer</li>
+                <li>There are <strong>{{numberLayers}}</strong> layers on the pallet</li>
+                <li>Each box weighs <strong>{{boxWeight}} kg</strong></li>
                 <li>The pallet weighs <strong>{{palletWeight}} kg</strong></li>
             </ul>
-            <h2>What is the combined weight of the cement bags and the pallet?</h2>  
+            <h2>What is the combined weight of the boxes and the pallet?</h2>  
 
             <div class="div-color-dark">
                 <form ng-submit="checkAnswer()">
@@ -87,12 +92,18 @@
             <button class = "button btn-black" ng-click="randomQuestion()" style = "max-width: 500px;width: 100%;">Randomize Values</button>
             <div ng-show = "answerSection">
                 <h2 ng-model="correctAnswer">The Correct Answer is: {{correctAnswer}} kg</h2>  
-                <p><strong>Step 1 - Calculate the total weight of the bags</strong></p>
-                <p>Number of bags <strong>times</strong> the weight of each bag = Total weight of all bags</p>
-                <p>{{numberBags}} x {{bagWeight}} = {{numberBags * bagWeight}} </p>
-                <p><strong>Step 2 - Add the weight of the pallet to the total weight of the bags</strong></p>
-                <p>Total weight of all bags <strong>plus</strong> the weight of the pallet <strong>=</strong> Total combined weight of cement bags and the pallet</p>
-                <p>{{numberBags * bagWeight}} + {{palletWeight}} = {{numberBags * bagWeight + palletWeight}}</p>
+                <p><strong>Step 1 - Calculate the total number of boxes</strong></p>
+                <p>Number of boxes per layer <strong>times</strong> the number of layers = Total number of boxes</p>
+                <p>{{boxesPerLayer}} x {{numberLayers}} = {{boxesPerLayer * numberLayers}}</p>
+
+                <p><strong>Step 2 - Calculate the total weight of the boxes</strong></p>
+                <p>Number of boxes <strong>times</strong> the weight of each box = Total weight of all boxes</p>
+                <p>{{boxesPerLayer * numberLayers}} x {{boxWeight}} = {{boxesPerLayer * numberLayers * boxWeight}}</p>
+
+                <p><strong>Step 3 - Add the weight of the pallet to the total weight of the boxes</strong></p>
+                <p>Total weight of all boxes <strong>plus</strong> the weight of the pallet <strong>=</strong> Total combined weight of the boxes and the pallet</p>
+                <p>{{boxesPerLayer * numberLayers * boxWeight}} + {{palletWeight}} = {{boxesPerLayer * numberLayers * boxWeight + palletWeight}}</p>
+
             </div>
         </div>
     </body>

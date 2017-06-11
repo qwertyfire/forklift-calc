@@ -6,7 +6,7 @@
 
 
         <title>Calculate Drums on a Pallet</title>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+        <script src="js/angular-1.2.1.min.js"></script>
         <script>
             var countryApp = angular.module('countryApp', []);
             countryApp.controller('GuessNumber', function ($scope) {
@@ -57,12 +57,12 @@
 
         <div class = "div-color centered" style = "max-width: 500px; width: auto;">
             <ul class ="nav">
-                <li><a  href="/calc/bags">Bags</a></li>
-                <li><a href="/calc/boxes">Boxs</a></li>
-                <li><a class="active" href="/calc/drums">Drums</a></li>
+                <li><a  href="/CALCAPP/bags.html">Bags</a></li>
+                <li><a href="/CALCAPP/boxes.html">Boxs</a></li>
+                <li><a class="active" href="/CALCAPP/drums.html">Drums</a></li>
             </ul>
             <h2>The load to be moved is pallet stacked with drums.</h2>
-            <img src ="http://www.cargorestraintsystems.com.au/wp-content/uploads/2015/06/Palletising-Chemicals-in-Plastic-Drums-Cargo-Restraint-Systems-Pty-Ltd.jpg" style = "max-width: 500px;width: 100%;">
+            <img src ="img/Palletising-Chemicals-in-Plastic-Drums-Cargo-Restraint-Systems-Pty-Ltd.jpg" style = "max-width: 500px;width: 100%;">
             <ul>
                 <li><strong>{{numberDrums}}</strong> drums on a pallet</li>
                 <li>Each drum weighs <strong>{{drumWeight}} kg</strong></li>
